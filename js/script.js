@@ -15,7 +15,7 @@ window.addEventListener('scroll', () => {
 });
 
 // ================= CONFIG DE PRODUCTOS (JSON) =================
-const PRODUCTS_URL = 'data/products.json'; // ajusta la ruta si es necesario
+const PRODUCTS_URL = '../Data/products.json'; // ajusta la ruta si es necesario
 
 // Array de productos que se llenará desde el JSON
 let products = [];
