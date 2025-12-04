@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Bridas de sujeción industrial",
+    "description": "Bridas en acero al carbono para montaje de estructuras y tuberías en ambientes industriales exigentes.",
+    "price": 85000,
+    "image": "assets/img productos/bridas.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Ejes mecanizados de precisión",
+    "description": "Ejes torneados y fresados en CNC, balanceados y listos para integrar a sistemas de transmisión.",
+    "price": 195000,
+    "image": "assets/img productos/ejes.png"
+  },
+  {
+    "id": 3,
+    "name": "Soportes y bases metálicas",
+    "description": "Soportes fabricados a medida para maquinaria, bandas transportadoras y equipos especiales.",
+    "price": 120000,
+    "image": "assets/img productos/soportes.png"
+  }
+]
