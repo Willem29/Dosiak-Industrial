@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contáctanos | Dosiak Industrial</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="logo">Dosiak<span>Industrial</span></a>
+      <nav id="menu" class="menu">
+        <a href="../index.html#about">Inicio</a>
+        <a href="../index.html#solutions">Servicios</a>
+        <a href="../index.html#products">Productos</a>
+        <a href="../index.html#cases">Casos de Éxito</a>
+        <a class="active" href="../UI/contact.php">Contáctanos</a>
+      </nav>
+      <div id="hamburger" class="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTACT PAGE -->
+  <section class="section contact-page">
+    <div class="contact-container">
+      <h2>Contáctanos</h2>
+      <p class="contact-intro">
+        Estamos listos para acompañarte en tus proyectos industriales.  
+        Diligencia el formulario o escríbenos directamente por WhatsApp.
+      </p>
+
+      <!-- FORMULARIO -->
+      <form class="contact-form" id="contactForm">
+        <input type="text" name="name" placeholder="Tu nombre" required>
+        <input type="email" name="email" placeholder="Correo electrónico" required>
+        <input type="text" name="title" placeholder="Asunto" required>
+        <textarea name="message" placeholder="Escribe tu mensaje..." rows="5" required></textarea>
+
+        <button type="submit">Enviar mensaje</button>
+      </form>
+
+      <!-- INFORMACIÓN DE CONTACTO -->
+      <div class="contact-info">
+        <h3>Información de contacto</h3>
+        <p><strong>Teléfono:</strong> +57 300 838 7184</p>
+        <p><strong>Email:</strong> dosiakindustrial@gmail.com</p>
+        <p><strong>Dirección:</strong> Bogotá, Colombia</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTÓN WHATSAPP FLOTANTE -->
+  <a href="https://wa.me/573008387184?text=Hola%20Dosiak%20Industrial,%20necesito%20más%20información."
+     class="whatsapp-float" target="_blank" aria-label="WhatsApp Dosiak">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png"
+         alt="WhatsApp" class="whatsapp-icon">
+  </a>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2025 Dosiak Industrial. Ingeniería y Manufactura de Precisión.</p>
+  </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"> </script>
+<script src="../js/script.js"></script>
+<script src="../js/contact.js"></script>
+</body>
+
+</html>
+

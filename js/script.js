@@ -14,36 +14,18 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// ================= PRODUCTOS QUEMADOS =================
-const products = [
-  {
-    id: 1,
-    name: 'Bridas de sujeción industrial',
-    description: 'Bridas en acero al carbono para montaje de estructuras y tuberías en ambientes industriales exigentes.',
-    price: 85000,
-    image: 'assets/img productos/bridas.jpg' 
-  },
-  {
-    id: 2,
-    name: 'Ejes mecanizados de precisión',
-    description: 'Ejes torneados y fresados en CNC, balanceados y listos para integrar a sistemas de transmisión.',
-    price: 195000,
-    image: 'assets/img productos/ejes.png'
-  },
-  {
-    id: 3,
-    name: 'Soportes y bases metálicas',
-    description: 'Soportes fabricados a medida para maquinaria, bandas transportadoras y equipos especiales.',
-    price: 120000,
-    image: 'assets/img productos/soportes.png '
-  }
-];
+// ================= CONFIG DE PRODUCTOS (JSON) =================
+const PRODUCTS_URL = 'data/products.json'; // ajusta la ruta si es necesario
 
-// por si luego agregas con formulario
-let nextProductId = products.length + 1;
+// Array de productos que se llenará desde el JSON
+let products = [];
+
+// por si luego agregas productos con formulario
+let nextProductId = 1;
 
 // ================= ESTADO DEL CARRITO =================
 let cart = [];
+const CART_STORAGE_KEY = 'dosiak_cart';
 
 // ================= HELPER MONEDA =================
 function formatCurrency(value) {
@@ -54,12 +36,77 @@ function formatCurrency(value) {
   });
 }
 
+// ================= CARGA DE PRODUCTOS DESDE JSON =================
+async function loadProducts() {
+  try {
+    const response = await fetch(PRODUCTS_URL);
+
+    if (!response.ok) {
+      throw new Error('No se pudo cargar el archivo de productos');
+    }
+
+    const data = await response.json();
+    products = Array.isArray(data) ? data : [];
+
+    // calcular el siguiente ID por si luego creas productos dinámicamente
+    if (products.length > 0) {
+      const maxId = Math.max(...products.map(p => Number(p.id) || 0));
+      nextProductId = maxId + 1;
+    } else {
+      nextProductId = 1;
+    }
+  } catch (error) {
+    console.error(error);
+
+    const productsGrid = document.getElementById('products-grid');
+    if (productsGrid) {
+      productsGrid.innerHTML = `
+        <p class="error">
+          No se pudieron cargar los productos en este momento. Intenta de nuevo más tarde.
+        </p>
+      `;
+    }
+  }
+}
+
+// ================= PERSISTENCIA DEL CARRITO =================
+function loadCartFromStorage() {
+  try {
+    const stored = localStorage.getItem(CART_STORAGE_KEY);
+    if (!stored) return;
+
+    const parsed = JSON.parse(stored);
+    if (Array.isArray(parsed)) {
+      cart = parsed;
+    }
+  } catch (error) {
+    console.error('Error al leer el carrito de localStorage', error);
+  }
+}
+
+function saveCartToStorage() {
+  try {
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+  } catch (error) {
+    console.error('Error al guardar el carrito en localStorage', error);
+  }
+}
+
 // ================= RENDER DE PRODUCTOS =================
 function renderProducts() {
   const productsGrid = document.getElementById('products-grid');
   if (!productsGrid) return; // si no existe el contenedor, salimos
 
   productsGrid.innerHTML = '';
+
+  if (!products || products.length === 0) {
+    productsGrid.innerHTML = `
+      <p class="no-products">
+        No hay productos disponibles en este momento.
+      </p>
+    `;
+    return;
+  }
 
   products.forEach(product => {
     const card = document.createElement('div');
@@ -91,10 +138,10 @@ function renderProducts() {
 
 // ================= LÓGICA DEL CARRITO =================
 function addToCart(productId) {
-  const product = products.find(p => p.id === productId);
+  const product = products.find(p => Number(p.id) === productId);
   if (!product) return;
 
-  const existingItem = cart.find(item => item.id === productId);
+  const existingItem = cart.find(item => Number(item.id) === productId);
 
   if (existingItem) {
     existingItem.qty += 1;
@@ -102,11 +149,13 @@ function addToCart(productId) {
     cart.push({ ...product, qty: 1 });
   }
 
+  saveCartToStorage();
   updateCartUI();
 }
 
 function removeFromCart(productId) {
-  cart = cart.filter(item => item.id !== productId);
+  cart = cart.filter(item => Number(item.id) !== productId);
+  saveCartToStorage();
   updateCartUI();
 }
 
@@ -230,7 +279,16 @@ if (cartCheckoutBtn) {
 }
 
 // ================= INICIALIZACIÓN =================
-document.addEventListener('DOMContentLoaded', () => {
-  renderProducts();  // <- AQUÍ se pintan las tarjetas
+document.addEventListener('DOMContentLoaded', async () => {
+  // 1. Cargar carrito desde localStorage
+  loadCartFromStorage();
+
+  // 2. Cargar productos desde JSON
+  await loadProducts();
+
+  // 3. Renderizar productos y carrito
+  renderProducts();
   updateCartUI();
 });
+
+

@@ -27,14 +27,15 @@
   <!-- NAVBAR -->
   <header class="navbar">
     <div class="nav-container">
-      <a href="index.html" class="logo">Dosiak<span>Industrial</span></a>
+      <a href="index.html" class="logo logo-stacked">
+        <img src="assets/logo.png" alt="Logo Dosiak" class="logo-img">      
+      </a>
       <nav id="menu" class="menu">
         <a href="#about">Inicio</a>
         <a href="#solutions">Servicios</a>
         <a href="#products">Productos</a>
-        <a href="#innovation">Innovación</a>
         <a href="#cases">Casos de Éxito</a>
-        <a href="contact.html">Contáctanos</a>
+        <a href="UI/contact.html">Contáctanos</a>
       </nav>
       <div id="hamburger" class="hamburger">
         <span></span><span></span><span></span>
@@ -47,7 +48,7 @@
     <img src="assets/imgPrincipal.png" alt="Fondo industrial Dosiak" class="hero-bg">
     <div class="overlay"></div>
     <div class="hero-content">
-      <h1>Soluciones Industriales que Mueven el Futuro</h1>
+      <h1>Elevando estándares construyendo legados</h1>
       <p>Más de 30 años de experiencia diseñando, fabricando y montando proyectos de ingeniería en toda Colombia.</p>
       <a href="#solutions" class="btn">Explorar Soluciones</a>
     </div>
@@ -90,34 +91,47 @@
         enfocados en ingeniería, manufactura y montaje de alto rendimiento.
       </p>
       <div class="solutions-grid">
-        <div class="solution-card">
-          <img src="assets/imgIngenieraDiseño.png" alt="Ingeniería y Diseño" loading="lazy">
+
+        <!-- Ingeniería y Diseño -->
+        <a href="UI/servicio_ingenieria.html" class="solution-card">
+          <img src="assets/img servicios/imgIngenieraDiseño.png" alt="Ingeniería y Diseño" loading="lazy">
           <div class="solution-text">
             <h3>Ingeniería y Diseño</h3>
-            <p>Desarrollamos proyectos industriales personalizados con modelado 3D, simulación estructural y diseño de
-              sistemas mecánicos avanzados.</p>
+            <p>
+              Desarrollamos proyectos industriales personalizados con modelado 3D, simulación estructural
+              y diseño de sistemas mecánicos avanzados.
+            </p>
           </div>
-        </div>
-        <div class="solution-card">
-          <img src="assets/imgMecanizadoaMedida.png" alt="Mecanizados a medida" loading="lazy">
+        </a>
+
+        <!-- Mecanizados a Medida -->
+        <a href="UI/servicio_mecanizado.html" class="solution-card">
+          <img src="assets/img servicios/imgMecanizadoaMedida.png" alt="Mecanizados a medida" loading="lazy">
           <div class="solution-text">
             <h3>Mecanizados a Medida</h3>
-            <p>Fabricamos componentes metálicos con tecnología CNC, corte por plasma y tratamientos térmicos para
-              garantizar precisión y durabilidad.</p>
+            <p>
+              Fabricamos componentes metálicos con tecnología CNC, corte por plasma y tratamientos térmicos
+              para garantizar precisión y durabilidad.
+            </p>
           </div>
-        </div>
-        <div class="solution-card">
-          <img src="assets/imgConsultoriaTecnica.png" alt="Consultoría Técnica" loading="lazy">
+        </a>
 
+        <!-- Consultoría Técnica -->
+        <a href="UI/servicio_consultoria.html" class="solution-card">
+          <img src="assets/img servicios/imgConsultoriaTecnica.png" alt="Consultoría Técnica" loading="lazy">
           <div class="solution-text">
             <h3>Consultoría Técnica</h3>
-            <p>Ofrecemos asesoría especializada en procesos industriales, optimización de recursos y soluciones para
-              mantenimiento preventivo, además de montaje de estructuras metálicas y plantas productivas.</p>
+            <p>
+              Ofrecemos asesoría especializada en procesos industriales, optimización de recursos y soluciones
+              para mantenimiento preventivo, además de montaje de estructuras metálicas y plantas productivas.
+            </p>
           </div>
-        </div>
+        </a>
+
       </div>
     </div>
   </section>
+
 
   <!-- PRODUCTOS -->
   <section id="products" class="section products reveal">
@@ -135,35 +149,23 @@
   </section>
 
 
-  <!-- INOVACIÓN -->
-  <section id="innovation" class="innovation reveal">
-    <div class="innovation-overlay"></div>
-    <div class="innovation-content">
-      <h2>Innovación y Tecnología</h2>
-      <p>
-        Apostamos por la transformación digital y la automatización industrial.
-        Implementamos herramientas de modelado virtual, diseño asistido por computadora
-        y control de calidad inteligente para optimizar la productividad y seguridad de nuestros procesos.
-      </p>
-    </div>
-  </section>
   <!-- CASES -->
   <section id="cases" class="section cases reveal">
     <div class="container">
       <h2>Casos de Éxito</h2>
       <div class="grid">
         <div class="case">
-          <img src="assets/imgModernizacionLinea.png" alt="Caso 1" loading="lazy">
-          <h4>Modernización de Línea de Producción</h4>
-          <p>Implementación de sistemas automatizados que incrementaron la productividad y redujeron los costos
-            operativos.</p>
+          <img src="assets/img casos exito/estructura.png" alt="Caso 1" loading="lazy">
+          <h4>Fabricación y montaje</h4>
+          <p>Fabricación de estructuras acero al carbono, acero inoxidable y mezzanines.</p>
         </div>
         <div class="case">
-          <img src="assets/imgReingenieriaEquiposIndustriales.png" alt="Caso 2" loading="lazy">
+          <img src="assets/img casos exito/imgReingenieriaEquiposIndustriales.png" alt="Caso 2" loading="lazy">
           <h4>Reingeniería de Equipos Industriales</h4>
           <p>Diseño y fabricación de componentes a medida para plantas de procesamiento y montaje estructural.</p>
         </div>
       </div>
+    </div>
     </div>
   </section>
   <!-- BOTÓN DE WHATSAPP FLOTANTE-->
@@ -174,31 +176,33 @@
   </a>
 
   <!-- CARRITO DE COMPRAS -->
-<div class="cart-widget" id="cartWidget">
-  <button class="cart-toggle" id="cartToggle" aria-label="Abrir carrito">
-    🛒
-    <span class="cart-count" id="cartCount">0</span>
-  </button>
+  <div class="cart-widget" id="cartWidget">
+    <button class="cart-toggle" id="cartToggle" aria-label="Abrir carrito">
+      🛒
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
 
-  <div class="cart-panel" id="cartPanel">
-    <h3>Carrito de compras</h3>
-    <div id="cartItems" class="cart-items">
-      <p class="cart-empty">Tu carrito está vacío.</p>
-    </div>
-    <div class="cart-footer">
-      <div class="cart-total">
-        Total: <span id="cartTotal">$0</span>
+    <div class="cart-panel" id="cartPanel">
+      <h3>Carrito de compras</h3>
+      <div id="cartItems" class="cart-items">
+        <p class="cart-empty">Tu carrito está vacío.</p>
       </div>
-      <button class="btn cart-checkout" type="button">
-        Finalizar pedido
-      </button>
+      <div class="cart-footer">
+        <div class="cart-total">
+          Total: <span id="cartTotal">$0</span>
+        </div>
+        <button class="btn cart-checkout" type="button">
+          Finalizar pedido
+        </button>
+      </div>
     </div>
   </div>
-</div>
   <!-- PIE DE PAGINA -->
   <footer class="footer">
     <p>© 2025 Dosiak Industrial. Ingeniería y Manufactura de Precisión.</p>
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"> </script>
   <script src="js/script.js"></script>
+  <script src="js/contact.js"></script>
 </body>
 </html>
