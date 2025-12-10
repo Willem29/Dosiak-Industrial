@@ -15,7 +15,7 @@ window.addEventListener('scroll', () => {
 });
 
 // ================= CONFIG DE PRODUCTOS (JSON) =================
-const PRODUCTS_URL = 'Data/products.json'; // ajusta la ruta si es necesario
+const PRODUCTS_URL = '../Data/products.json'; // ajusta la ruta si es necesario
 
 // Array de productos que se llenará desde el JSON
 let products = [];
@@ -95,7 +95,7 @@ function saveCartToStorage() {
 // ================= RENDER DE PRODUCTOS =================
 function renderProducts() {
   const productsGrid = document.getElementById('products-grid');
-  if (!productsGrid) return; // si no existe el contenedor, salimos
+  if (!productsGrid) return;
 
   productsGrid.innerHTML = '';
 
@@ -112,11 +112,57 @@ function renderProducts() {
     const card = document.createElement('div');
     card.classList.add('product-card');
 
+    // ¿Tiene variantes de color? (objeto con default, verde, rojo, etc.)
+    const hasVariants = typeof product.image === 'object' && product.image !== null;
+
+    let initialImage = product.image;
+
+    let colors = [];
+    if (hasVariants) {
+      colors = Object.keys(product.image);
+      // default si existe, si no el primero
+      if (product.image.default) {
+        initialImage = product.image.default;
+      } else {
+        initialImage = product.image[colors[0]];
+      }
+    }
+
+    // Etiquetas bonitas para tooltip / accesibilidad
+    const colorLabels = {
+      default: 'Negro',
+      negro: 'Negro',
+      verde: 'Verde',
+      rojo: 'Rojo'
+    };
+
+    // HTML de las bolitas de color
+    const colorSelectorHTML = hasVariants
+      ? `
+        <div class="product-colors">
+          <span class="product-colors-label">Color:</span>
+          <div class="product-colors-swatches">
+            ${colors.map((colorKey, index) => `
+              <button
+                type="button"
+                class="color-swatch ${index === 0 ? 'is-active' : ''}"
+                data-color="${colorKey}"
+                aria-label="${colorLabels[colorKey] || colorKey}"
+              ></button>
+            `).join('')}
+          </div>
+        </div>
+      `
+      : '';
+
     card.innerHTML = `
-      <img src="${product.image}" alt="${product.name}">
+      <img class="product-img" src="${initialImage}" alt="${product.name}">
       <div class="product-body">
         <h3 class="product-title">${product.name}</h3>
         <p class="product-description">${product.description}</p>
+
+        ${colorSelectorHTML}
+
         <div class="product-price">${formatCurrency(product.price)}</div>
         <div class="product-actions">
           <button class="btn" data-id="${product.id}">Añadir al carrito</button>
@@ -125,9 +171,26 @@ function renderProducts() {
     `;
 
     productsGrid.appendChild(card);
+
+    // 🔴 Cambio de imagen al hacer clic en una bolita
+    if (hasVariants) {
+      const img = card.querySelector('.product-img');
+      const swatches = card.querySelectorAll('.color-swatch');
+
+      swatches.forEach(swatch => {
+        swatch.addEventListener('click', () => {
+          const color = swatch.dataset.color;
+          img.src = product.image[color];
+
+          // marcar activa
+          swatches.forEach(s => s.classList.remove('is-active'));
+          swatch.classList.add('is-active');
+        });
+      });
+    }
   });
 
-  // listeners de "Añadir al carrito"
+  // Listeners de "Añadir al carrito"
   productsGrid.querySelectorAll('button[data-id]').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = parseInt(btn.getAttribute('data-id'), 10);
@@ -243,9 +306,14 @@ document.addEventListener('click', (e) => {
 });
 
 // ================= FINALIZAR PEDIDO (WHATSAPP) =================
+
 function handleCheckout() {
   if (cart.length === 0) {
-    alert('Tu carrito está vacío. Añade productos antes de finalizar el pedido.');
+    showModal({
+      title: "Carrito vacío",
+      message: "No tienes productos en el carrito todavía. Añade productos antes de finalizar el pedido.",
+      type: "info"
+    });
     return;
   }
 
@@ -290,5 +358,55 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderProducts();
   updateCartUI();
 });
+
+// =============== MODAL GLOBAL ===============
+
+(function () {
+  const overlay = document.getElementById("feedbackOverlay");
+  const modal = document.getElementById("feedbackModal");
+  const titleEl = document.getElementById("feedbackTitle");
+  const messageEl = document.getElementById("feedbackMessage");
+  const btnClose = document.getElementById("modalClose");
+  const btnOk = document.getElementById("modalOk");
+
+  if (!overlay || !modal || !titleEl || !messageEl) {
+    // Si esta página no tiene modal en el HTML, salimos
+    return;
+  }
+
+  function closeModal() {
+    overlay.classList.remove("active");
+    // quitar callback (si lo llegamos a usar)
+    btnOk.onclick = null;
+  }
+
+  function openModal({ title, message, type = "info", onOk = null }) {
+    titleEl.textContent = title || "Mensaje";
+    messageEl.textContent = message || "";
+
+    modal.classList.remove("success", "error", "info");
+    modal.classList.add(type);
+
+    overlay.classList.add("active");
+
+    // click en Aceptar
+    btnOk.onclick = function () {
+      closeModal();
+      if (typeof onOk === "function") onOk();
+    };
+  }
+
+  // Cerrar con X o clic fuera o ESC
+  btnClose.addEventListener("click", closeModal);
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closeModal();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+
+  // Hacemos la función global para usar en otros .js
+  window.showModal = openModal;
+})();
 
 

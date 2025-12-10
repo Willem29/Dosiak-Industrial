@@ -14,7 +14,7 @@
   <meta name="author" content="Dosiak Industrial">
   <meta property="og:title" content="Dosiak Industrial | Ingeniería y Manufactura de Precisión">
   <meta property="og:description"
-    content="Más de 30 años de experiencia diseñando, fabricando y montando soluciones industriales en toda Colombia.">
+    content="12 años de experiencia diseñando, fabricando y montando proyectos de ingeniería en toda Colombia.">
   <meta property="og:image" content="https://tusitio.com/assets/logo-dosiak.png">
   <meta property="og:url" content="https://tusitio.com">
   <meta name="twitter:card" content="summary_large_image">
@@ -23,7 +23,6 @@
 </head>
 
 <body>
-
   <!-- NAVBAR -->
   <header class="navbar">
     <div class="nav-container">
@@ -33,7 +32,7 @@
       <nav id="menu" class="menu">
         <a href="#about">Inicio</a>
         <a href="#solutions">Servicios</a>
-        <a href="#products">Productos</a>
+        <a href="UI/products.html">Productos</a>
         <a href="#cases">Casos de Éxito</a>
         <a href="UI/contact.html">Contáctanos</a>
       </nav>
@@ -49,7 +48,7 @@
     <div class="overlay"></div>
     <div class="hero-content">
       <h1>Elevando estándares construyendo legados</h1>
-      <p>Más de 30 años de experiencia diseñando, fabricando y montando proyectos de ingeniería en toda Colombia.</p>
+      <p>12 años de experiencia diseñando, fabricando y montando proyectos de ingeniería en toda Colombia.</p>
       <a href="#solutions" class="btn">Explorar Soluciones</a>
     </div>
   </section>
@@ -66,8 +65,7 @@
             adaptadas a las necesidades específicas de cada cliente.
           </p>
           <p>
-            Nuestro compromiso con la innovación, la calidad y la seguridad nos permite entregar proyectos confiables,
-            duraderos y eficientes, respaldados por más de tres décadas de experiencia.
+            Nuestro compromiso con la innovación, la calidad y la seguridad nos permite desarrollar proyectos confiables, duraderos y eficientes, respaldados por la amplia experiencia que cada uno de nuestros colaboradores ha construido a lo largo de más de tres décadas.
           </p>
           <p>
             A través de la tecnología, la ingeniería de precisión y un equipo altamente calificado,
@@ -110,8 +108,7 @@
           <div class="solution-text">
             <h3>Mecanizados a Medida</h3>
             <p>
-              Fabricamos componentes metálicos con tecnología CNC, corte por plasma y tratamientos térmicos
-              para garantizar precisión y durabilidad.
+              Fabricamos componentes con tecnología CNC, corte por hilo y electroerosión para garantizar precisión y calidad en cada una de las piezas que fabricamos.
             </p>
           </div>
         </a>
@@ -122,8 +119,7 @@
           <div class="solution-text">
             <h3>Consultoría Técnica</h3>
             <p>
-              Ofrecemos asesoría especializada en procesos industriales, optimización de recursos y soluciones
-              para mantenimiento preventivo, además de montaje de estructuras metálicas y plantas productivas.
+              Ofrecemos asesoría especializada en procesos industriales, optimización de procesos y soluciones en mantenimiento.
             </p>
           </div>
         </a>
@@ -134,7 +130,7 @@
 
 
   <!-- PRODUCTOS -->
-  <section id="products" class="section products reveal">
+  <!--<section id="products" class="section products reveal">
     <div class="container">
       <h2>Productos</h2>
       <p class="products-intro">
@@ -143,10 +139,10 @@
       </p>
 
       <div id="products-grid" class="products-grid">
-        <!-- Aquí se insertarán las tarjetas de productos desde JS -->
+        
       </div>
     </div>
-  </section>
+  </section> -->
 
 
   <!-- CASES -->
@@ -176,7 +172,7 @@
   </a>
 
   <!-- CARRITO DE COMPRAS -->
-  <div class="cart-widget" id="cartWidget">
+  <!--<div class="cart-widget" id="cartWidget">
     <button class="cart-toggle" id="cartToggle" aria-label="Abrir carrito">
       🛒
       <span class="cart-count" id="cartCount">0</span>
@@ -196,7 +192,18 @@
         </button>
       </div>
     </div>
+  </div>-->
+
+    <!-- MODAL GLOBAL -->
+  <div class="modal-overlay" id="feedbackOverlay">
+    <div class="modal-box" id="feedbackModal">
+      <button class="modal-close" id="modalClose" aria-label="Cerrar mensaje">×</button>
+      <h3 id="feedbackTitle">Mensaje</h3>
+      <p id="feedbackMessage">Contenido del mensaje.</p>
+      <button class="btn modal-button" id="modalOk">Aceptar</button>
+    </div>
   </div>
+
   <!-- PIE DE PAGINA -->
   <footer class="footer">
     <p>© 2025 Dosiak Industrial. Ingeniería y Manufactura de Precisión.</p>

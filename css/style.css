@@ -385,7 +385,7 @@ background: #F2F2F2;
 
 .product-card img {
   width: 100%;
-  height: 220px;
+  height: 260px;
   object-fit: cover;
 }
 
@@ -759,3 +759,163 @@ background: #F2F2F2;
     height: 24px;
   }
 }
+
+/* ================= MODAL FEEDBACK GLOBAL ================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-box {
+  background: #fff;
+  border-radius: 14px;
+  max-width: 420px;
+  width: 90%;
+  padding: 1.8rem 1.6rem 1.5rem;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  position: relative;
+  text-align: left;
+  border-top: 4px solid #B0000F;
+  animation: modal-pop 0.25s ease-out;
+}
+
+.modal-box h3 {
+  margin-bottom: 0.6rem;
+  font-size: 1.3rem;
+  color: #1A1A1A;
+}
+
+.modal-box p {
+  margin-bottom: 1.2rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+.modal-button {
+  width: 100%;
+  text-align: center;
+}
+
+/* Botón cerrar (X) */
+.modal-close {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  border: none;
+  background: transparent;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #777;
+}
+
+.modal-close:hover {
+  color: #B0000F;
+}
+
+/* Variantes éxito / error / info */
+.modal-box.success {
+  border-top-color: #28a745;
+}
+
+.modal-box.error {
+  border-top-color: #B0000F;
+}
+
+.modal-box.info {
+  border-top-color: #1A1A1A;
+}
+
+@keyframes modal-pop {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Contenedor general del selector de color */
+.product-colors {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #1A1A1A;
+}
+
+.product-colors-label {
+  font-weight: 600;
+}
+
+/* Contenedor de las bolitas */
+.product-colors-swatches {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Bolita de color */
+.color-swatch {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: #ccc;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+/* Estado activo (color seleccionado) */
+.color-swatch.is-active {
+  border-color: #1A1A1A;
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+  transform: scale(1.05);
+}
+
+/* Pequeño hover para feedback */
+.color-swatch:hover {
+  transform: scale(1.1);
+}
+
+/* Colores específicos según la key del JSON */
+.color-swatch[data-color="default"],
+.color-swatch[data-color="negro"] {
+  background: #111111; /* negro */
+}
+.color-swatch[data-color="blanco"] {
+  background: #ece9e9; /* verde */
+}
+.color-swatch[data-color="verde"] {
+  background: #0f8a1f; /* verde */
+}
+
+.color-swatch[data-color="rojo"] {
+  background: #B0000F; /* rojo corporativo */
+}
+.color-swatch[data-color="rojo"] {
+  background: #B0000F; /* rojo corporativo */
+}
+
+.color-swatch[data-color="azul"] {
+  background: hwb(219 5% 5%); /* rojo corporativo */
+}
+.color-swatch[data-color="amarillo"] {
+  background: hwb(59 14% 5%); /* rojo corporativo */
+}
+/* Por si luego agregas más colores, puedes seguir con data-color="azul", etc. */
+
