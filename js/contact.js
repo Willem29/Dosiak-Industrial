@@ -16,13 +16,21 @@
 
     emailjs.sendForm("service_bcqsk0p", "template_f6xc2hv", "#contactForm")
       .then(function () {
-        alert("✅ Tu mensaje fue enviado correctamente. Pronto nos pondremos en contacto.");
+        showModal({
+            title: "Mensaje Enviado con éxito",
+            message: "Pronto nos pondremos en contacto",
+            type: "success"
+        });
         form.reset();
         button.disabled = false;
         button.textContent = "Enviar mensaje";
       }, function (error) {
-        console.error("Error:", error);
-        alert("❌ Hubo un problema enviando el mensaje. Intenta nuevamente.");
+        console.error("Error:", error);        
+        showModal({
+            title: "Problema enviando Mensaje",
+            message: "Hubo un problema enviando el mensaje. Intenta nuevamente.",
+            type: "failure"
+        });
         button.disabled = false;
         button.textContent = "Enviar mensaje";
       });
